@@ -1,0 +1,8 @@
+services:
+  flask-app:
+    image: st125052/a6-retrieval-augmented-generation:latest-deployment
+    ports:
+      - "5000:5000"
+    volumes:
+      - /mnt/docker-data/my_service_data:/app/data
+    restart: always
