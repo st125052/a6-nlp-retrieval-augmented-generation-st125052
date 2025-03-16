@@ -29,8 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(`/predict?search=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
-                botMessageElement.innerHTML = `<strong>Bot:</strong> `;
-                simulateTyping(botMessageElement, data);
+                const { answer, source_documents } = data;
+                const fullMessage = `${answer}<br><br><strong>Source:</strong> ${source_documents}`;
+                simulateTyping(botMessageElement, fullMessage, true);
             })
             .catch(error => {
                 botMessageElement.innerHTML = `<strong>Bot:</strong> An error occurred. Please try again.`;
@@ -50,11 +51,16 @@ document.addEventListener("DOMContentLoaded", function() {
         return messageElement;
     }
     
-    function simulateTyping(element, message) {
+    function simulateTyping(element, message, isHTML = false) {
         let i = 0;
+        element.innerHTML = "<strong>Bot:</strong> ";
         function typeCharacter() {
             if (i < message.length) {
-                element.innerHTML += message.charAt(i);
+                if (isHTML) {
+                    element.innerHTML = "<strong>Bot:</strong> " + message.substring(0, i + 1);
+                } else {
+                    element.innerHTML += message.charAt(i);
+                }
                 i++;
                 setTimeout(typeCharacter, 50);
             }

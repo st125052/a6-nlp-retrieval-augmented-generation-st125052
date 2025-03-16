@@ -48,7 +48,8 @@ def get_question_generator(llm):
 def get_doc_chain(llm):
     prompt_template = """
         You are a helpful assistant that answers questions about the person based on their personal documents.
-        Use the following context to answer the question. If you don't know the answer, just say you don't know.
+        Use the following context to answer the question. Always answer the question in the first person tone.
+        If you don't know the answer, just say you don't know.
         Don't make things up.    
 
         Context: {context}
@@ -101,7 +102,7 @@ def get_prediction(prompt_question, chain):
 
     final_answer = {
         "answer": answer['answer'],
-        "source_documents": answer['source_documents'][0].metadata['source'],
+        "source_documents": answer['source_documents'][0].metadata['source'][2:],
     }   
 
     return final_answer
