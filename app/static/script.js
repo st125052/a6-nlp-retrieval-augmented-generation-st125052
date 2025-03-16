@@ -1,43 +1,64 @@
-document.getElementById('searchForm').addEventListener('submit', function (event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+    const chatWindow = document.getElementById("chatWindow");
+    const sendButton = document.getElementById("sendButton");
+    const inputError = document.getElementById("inputError");
+    
+    chatInput.addEventListener("input", function() {
+        sendButton.disabled = chatInput.value.trim().length === 0;
+    });
+    
+    chatForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const query = chatInput.value.trim();
 
-    // Get form input
-    const search = document.getElementById('search').value.trim();
-    let isValid = true;
-
-    // Clear previous error messages
-    document.getElementById('searchTextError').textContent = '';
-
-    // Validate search text input
-    if (!search || search.length === 0) {
-        document.getElementById('searchTextError').textContent = 'Please enter a valid query.';
-        isValid = false;
+        if (!query) {
+            inputError.textContent = "Query cannot be empty.";
+            return;
+        }
+        inputError.textContent = "";
+        sendButton.disabled = true;
+        chatInput.disabled = true;
+        
+        addChatMessage("You", query, "user-message");
+        chatInput.value = "";
+        
+        const botMessageElement = addChatMessage("Bot", "Typing...", "bot-message");
+        
+        fetch(`/predict?search=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                botMessageElement.innerHTML = `<strong>Bot:</strong> `;
+                simulateTyping(botMessageElement, data);
+            })
+            .catch(error => {
+                botMessageElement.innerHTML = `<strong>Bot:</strong> An error occurred. Please try again.`;
+            })
+            .finally(() => {
+                sendButton.disabled = false;
+                chatInput.disabled = false;
+            });
+    });
+    
+    function addChatMessage(sender, message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("chat-message", className);
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatWindow.appendChild(messageElement);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        return messageElement;
     }
-
-    if (isValid) {
-        predictRelevantContent(search);
+    
+    function simulateTyping(element, message) {
+        let i = 0;
+        function typeCharacter() {
+            if (i < message.length) {
+                element.innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeCharacter, 50);
+            }
+        }
+        typeCharacter();
     }
 });
-
-function predictRelevantContent(search) {
-    const apiUrl = `/predict?search=${encodeURIComponent(search)}`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (Array.isArray(data) && data.length > 0) {
-                const resultContainer = document.getElementById('resultContainer');
-                const searchResultElement = document.getElementById('searchResult');
-
-                searchResultElement.innerHTML = '';
-
-                data.forEach(word => {
-                    searchResultElement.innerHTML += `${word}`;
-                });
-                
-                resultContainer.style.display = 'block';
-            } else {
-                console.error('Unexpected API response format:', data);
-            }
-        }).catch(error => console.error('Error:', error));
-}

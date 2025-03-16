@@ -18,10 +18,10 @@ def serve_custom_path(path):
     return send_from_directory('./', path)
 
 @app.route('/predict', methods=['GET'])
-def predict_price():
-    input_search_text = request.args.get('search')
-    prediction = get_prediction(prompt=input_search_text)
-    return jsonify(prediction)
+def predict():
+    query = request.args.get('search', '').strip()   
+    response = get_prediction(query)
+    return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

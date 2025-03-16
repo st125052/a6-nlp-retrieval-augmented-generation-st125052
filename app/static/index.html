@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retrieval Augmented Generation</title>
-    <!-- Bootstrap CSS from CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100 bg-gradient">
-    <div class="jumbotron text-center p-5 shadow rounded-custom">
-        <!-- Header with centralized heading and link -->
-        <div class="d-flex flex-column align-items-center mb-4">
-            <h1 class="display-4 font-weight-bold text-dark mb-3">Retrieval Augmented Generation</h1>
-        </div>
-        
-        <p class="lead text-muted">Get Information About Me Based On Your Query</p>
-        
-        <hr class="my-4">
-        <form id="searchForm" class="text-left">
-            <!-- Year Input -->
-            <div class="form-group">
-                <input type="text" class="form-control" id="search" placeholder="Enter search text">
-                <small id="searchTextError" class="form-text text-danger"></small>
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center vh-100 bg-dark text-light">
+        <div class="chat-container p-4 shadow-lg rounded-custom bg-light text-dark w-50">
+            <h1 class="chat-title text-center text-primary display-4 font-weight-bold">Retrieval Augmented Generation</h1>
+
+            <div id="chatWindow" class="chat-window p-3 rounded bg-white shadow-sm">
+                <!-- Chat messages will be dynamically added here -->
             </div>
-            <button type="submit" class="btn btn-gradient btn-lg btn-block mt-4">Generate Information</button>
-        </form>
-        <!-- Result Display Section -->
-        <div id="resultContainer" class="result-container mt-5 p-4 text-center shadow-lg" style="display: none;">
-            <p id="searchResult" class="font-weight-bold display-4 text-success"></p>
+
+            <form id="chatForm" class="w-100 mt-4">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg" id="chatInput"
+                        placeholder="Ask me anything...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary btn-lg" id="sendButton" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <small id="inputError" class="form-text text-danger mt-2"></small>
+            </form>
         </div>
     </div>
-</div>
 
-<footer class="text-center text-muted mt-5">
-    <p>&copy; 2025 RetrievalAugmentedGeneration. All rights reserved.</p>
-</footer>
+    <footer class="text-center text-muted mt-5">
+        <p>&copy; 2025 RetrievalAugmentedGeneration. All rights reserved.</p>
+    </footer>
 
-<!-- Bootstrap JS and dependencies from CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and dependencies from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Custom JS -->
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
