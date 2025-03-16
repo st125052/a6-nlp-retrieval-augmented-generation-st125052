@@ -7,7 +7,7 @@ This is a web-based end-to-end application named Retrieval Augmented Generation.
 
 # About the Deep Learning Model
 
-The deep learning architecture implemented in this system is designed for retrieval-augmented generation (RAG), combining semantic search with a large language model (LLM)-based response generation. This architecture enhances information retrieval by embedding textual documents into vector space and retrieving the most relevant chunks based on user queries. The system then leverages a generative model to produce well-structured, contextually relevant responses. Here, the information is stored as a PDF (Swaraj.pdf) which was created using ChatGPT-o1 using the memory functionality in it. Any missing information was provided explicitly to it, based on which a final PDF was generated and returned by it.
+The deep learning architecture implemented in this system is designed for retrieval-augmented generation (RAG), combining semantic search with a large language model (LLM)-based response generation. This architecture enhances information retrieval by embedding textual documents into vector space and retrieving the most relevant chunks based on user queries. The system then leverages a generative model to produce well-structured, contextually relevant responses. Here, the information is stored as a PDF [Swaraj.pdf](https://github.com/st125052/a6-nlp-retrieval-augmented-generation-st125052/blob/main/notebooks/pdfs/Swaraj.pdf) which was created using ChatGPT-o1 using the memory functionality in it. Any missing information was provided explicitly to it, based on which a final PDF was generated and returned by it.
 
 
 # Creating the Prompt Template
