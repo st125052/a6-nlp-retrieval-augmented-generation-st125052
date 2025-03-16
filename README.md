@@ -78,6 +78,10 @@ Replacing `fastchat-t5-3b-v1.0` with `GPT-4o-mini` for response generation ensur
 Moreover, OpenAI’s API-based approach eliminates the need for manual quantization, model hosting, and fine-tuning, leading to faster deployment, lower maintenance overhead, and better scalability in production environments. The integration with `ConversationalRetrievalChain` ensures that responses are context-aware, meaning the model remembers prior interactions within a conversation window, making follow-up responses more coherent and engaging. This architecture ultimately elevates the user experience, providing a fast, reliable, and accurate AI-driven conversational assistant.
 
 
+# Analysis
+
+Both variants of Generators and Retrievers were analyzed [here](https://github.com/st125052/a6-nlp-retrieval-augmented-generation-st125052/blob/main/notebooks/pdfs/Analysis%20of%20RAG%20Models.pdf).
+
 # Website Creation
 
 The model was then hosted over the Internet with Flask as the backend, HTML, CSS, JS as the front end, and Docker as the container. The end-user is presented with a UI wherein a search input box is present. Once the user types in the first set of words, they click on the `Go` button or hit the 'Return' key on their keyboard. The input texts are sent to the JS handler which makes an API call to the Flask backend. The Flask backend has the GET route which intercepts the HTTP request. The input text is then fed to the model to generate the response. The result is then returned back to the JS handler as a list by the Flask backend. The JS handler then appends each token in the received list into the result container's inner HTML and finally makes it visible for the output to be shown. Any further interaction is captured by appending a new container to the existing document via JS. 
