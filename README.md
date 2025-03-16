@@ -131,9 +131,15 @@ The following describes the key points of the hosting discussion.
 
 You can access the website [here](https://aitmltask.online). 
 
+
 # Limitations
 
 Note that the model predicts only responses to a specific set of questions, as directed by the content in the PDF. Also, it may generate unwanted or hallucinated content for some contents, which is a known limitation.
+
+
+# Important Notes
+
+To improve safety, the existing OpenAI key used for training has been decommissioned, and a new key has been added in its place.
 
 
 # How to Run the Retrieval Augmented Generation Docker Container Locally
