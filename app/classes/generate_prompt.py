@@ -16,14 +16,18 @@ def get_openai_api_key():
 
 def get_retriever():
     embedding_model = OpenAIEmbeddings()
-    vector_path = '../models/vector-store-openai'
-    db_file_name = 'nlp_stanford'
 
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    vector_path = os.path.join(base_dir, '..', 'models', 'vector-store-openai')
+    
+    db_file_name = 'nlp_stanford'
+    
     vectordb = FAISS.load_local(
-        folder_path = os.path.join(vector_path, db_file_name),
-        embeddings = embedding_model,
-        index_name = 'nlp'
+        folder_path=os.path.join(vector_path, db_file_name),
+        embeddings=embedding_model,
+        index_name='nlp'
     ) 
+    
     return vectordb.as_retriever()
 
 def get_llm():
